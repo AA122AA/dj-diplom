@@ -1,0 +1,4 @@
+USER = "artem"
+PASSWORD = "1234"
+PORT = "5122"
+HOST = "188.242.131.186"
