@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.db import models
 
-# Create your models here.
 
 class OrderStatusChoices(models.TextChoices):
 
@@ -51,13 +50,18 @@ class Order(TimestampFields):
         verbose_name=("Пользователь"),
         on_delete=models.CASCADE,
     )
-#Понять чтотакое позиции
+    position = models.ManyToManyField(
+        "ProductOrder",
+        verbose_name=("Позиции"),
+        related_name="positions"
+        )
     status = models.TextField(
         verbose_name="Статус",
         choices=OrderStatusChoices.choices,
         default=OrderStatusChoices.NEW
     )
     total_order_amount = models.FloatField(verbose_name="Общая сумма заказа")
+
 
 class Collection(TimestampFields):
     header = models.CharField(verbose_name="Заголовок", max_length=50)
@@ -68,5 +72,20 @@ class Collection(TimestampFields):
         related_name="collection"
     )
 
+
+class ProductOrder(models.Model):
+    product = models.ForeignKey(
+        Product,
+        verbose_name="Товар",
+        on_delete=models.CASCADE
+        )
+    order = models.ForeignKey(
+        Order,
+        verbose_name="Заказ",
+        on_delete=models.CASCADE
+        )
+    amount = models.IntegerField(
+        verbose_name="Количество"
+        )
 
 

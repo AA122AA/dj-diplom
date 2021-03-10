@@ -1,17 +1,26 @@
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Measurement, Project
-from .serializers import MeasurmentSerializer, ProjectSerializer
+from .models import Collection, Order, Product, ProductOrder, Review 
+from .serializers import *
 
-class ProjectViewSet(ModelViewSet):
-    """ViewSet для проекта."""
-    # TODO: добавьте конфигурацию для объекта
-    queryset = Project.objects.all()
-    serializer_class = ProjectSerializer
+class ProductViewSet(ModelViewSet):
+    """ViewSet для продукта."""
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 
-class MeasurementViewSet(ModelViewSet):
-    """ViewSet для измерения."""
-    # TODO: добавьте конфигурацию для измерения
-    queryset = Measurement.objects.all()
-    serializer_class = MeasurmentSerializer
+class OrderViewSet(ModelViewSet):
+    """ViewSet для заказа."""
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+class ReviewViewSet(ModelViewSet):
+    """ViewSet для отзыва."""
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+class CollectionViewSet(ModelViewSet):
+    """ViewSet для подборки."""
+    queryset = Collection.objects.all()
+    serializer_class = CollectionSerializer

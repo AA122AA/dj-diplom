@@ -1,22 +1,43 @@
 from rest_framework import fields, serializers
 
-from shop.models import Project, Measurement
+from .models import Collection, Order, Product, ProductOrder, Review 
 
-class ProjectSerializer(serializers.ModelSerializer):
+
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Project
+        model = Product
         fields = [
             'id', 'name', 
-            'latitude', 'longitude', 
+            'description', 'price', 
             'created_at', 'updated_at'
         ]
 
     
-class MeasurmentSerializer(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Measurement
+        model = Order
         fields = [
-            'id', 'value', 'project', 
-            'created_at', 'updated_at',
-            'image'
+            'id', 'user_id', 'position', 
+            'status', "total_order_amount",
+            'created_at', 'updated_at'
         ]   
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = [
+            'id', 'author_id', 'product_id', 
+            'text', "rating",
+            'created_at', 'updated_at'
+        ]
+
+
+class CollectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Collection
+        fields = [
+            'id', 'header',  
+            'text', "products",
+            'created_at', 'updated_at'
+        ]
