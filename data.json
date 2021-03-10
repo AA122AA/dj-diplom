@@ -1,0 +1,81 @@
+[
+{
+  "model": "shop.product",
+  "pk": 1,
+  "fields": {
+    "name": "iPhone 11",
+    "description": "Apple iPhone 11, well priced phone with great specs",
+    "price": 50000
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 2,
+  "fields": {
+    "name": "Asus Rog Phone 5 Ultimate",
+    "description": "Best in class performer and cool-looking phone",
+    "price": 150000
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 3,
+  "fields": {
+    "name": "Raspberry pi 4 4gb",
+    "description": "Cool litle arm-based pc for pet-projects",
+    "price": 6500
+  }
+},
+{
+  "model": "shop.order",
+  "pk": 1,
+  "fields": {
+    "user_id": "1",
+    "position": {
+      "product": 1,
+      "order": 1,
+      "amount": 4
+    },
+    "status": "NEW",
+    "total_order_amount": 200000
+  }
+},
+{
+  "model": "shop.order",
+  "pk": 2,
+  "fields": {
+    "user_id": 1,
+    "position": {
+      "product": 3,
+      "order": 2,
+      "amount": 2
+    },
+    "status": "NEW",
+    "total_order_amount": 13000
+  }
+},
+{
+  "model": "shop.order",
+  "pk": 3,
+  "fields": {
+    "user_id": 2,
+    "position": {
+      "product": 2,
+      "order": 3,
+      "amount": 1
+    },
+    "status": "NEW",
+    "total_order_amount": 150000
+  }
+},
+{
+  "model": "shop.review",
+  "pk": 1,
+  "fields": {
+    "author_id": 2,
+    "product_id": 1,
+    "text": "Wow, I like it!!!",
+    "rating": 5
+  }
+}
+]

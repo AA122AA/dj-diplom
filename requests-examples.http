@@ -1,22 +1,43 @@
 # примеры API-запросов
 
-# получение объявлений
-GET http://localhost:8000/api/advertisements/
+# получение продуктов
+GET http://localhost:8000/shop/api/v1/products/
 Content-Type: application/json
 
 ###
-# создание объявления
-POST http://localhost:8000/api/advertisements/
+# создание продуктов
+POST http://localhost:8000/shop/api/v1/products/
 Content-Type: application/json
-Authorization: Token 9e7965c94d2edebd6a23d4d4d5080e9b87f6812b
+# Authorization: Token 9e7965c94d2edebd6a23d4d4d5080e9b87f6812b
 
 {
-  "title": "Table",
-  "description": "It is what it is"
+  "name": "Samsung S21 Ultra",
+  "description": "Big phone from Samsung, better get it on SnapDragon 888",
+  "price": 120000
 }
 
 ###
+# создание заказа
+POST http://localhost:8000/shop/api/v1/orders/
+Content-Type: application/json
+# Authorization: Token 9e7965c94d2edebd6a23d4d4d5080e9b87f6812b
 
+{
+  "user_id": 1,
+  "position": {
+    "product": 1,
+    "order": 1,
+    "amount": 3
+  },
+  "status": "NEW",
+  "total_order_amount": 150000
+}
+###
+# получение продуктов
+GET http://localhost:8000/shop/api/v1/products/
+Content-Type: application/json
+
+###
 # попытка поменять объявление
 PATCH http://localhost:8000/api/advertisements/5/
 Content-Type: application/json

@@ -25,7 +25,7 @@ class TimestampFields(models.Model):
 
 class Product(TimestampFields):
     name = models.CharField(verbose_name="Название", max_length=50)
-    description = models.TextField(verbose_name="Описание")
+    description = models.TextField(verbose_name="Описание", blank=True)
     price = models.FloatField(verbose_name="Цена")
 
 
@@ -36,11 +36,11 @@ class Review(TimestampFields):
         on_delete=models.CASCADE,
     )
     product_id = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        Product,
         verbose_name=("Продукт"),
         on_delete=models.CASCADE
         )
-    text = models.TextField(verbose_name="Текст")
+    text = models.TextField(verbose_name="Текст", blank=True)
     rating = models.IntegerField(verbose_name="Оценка")
 
 
@@ -50,6 +50,7 @@ class Order(TimestampFields):
         verbose_name=("Пользователь"),
         on_delete=models.CASCADE,
     )
+    #еще раз обдумать position, сейчас не верно 
     position = models.ManyToManyField(
         "ProductOrder",
         verbose_name=("Позиции"),
