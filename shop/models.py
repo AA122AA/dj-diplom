@@ -62,8 +62,11 @@ class Order(TimestampFields):
 class Collection(TimestampFields):
     header = models.CharField(verbose_name="Заголовок", max_length=50)
     text = models.TextField(verbose_name="Текст")
-    #Разобраться с m2m
-    products = models.ManyToManyField(Product)
+    products = models.ManyToManyField(
+        Product,
+        verbose_name="Продукты",
+        related_name="collection"
+    )
 
 
 
