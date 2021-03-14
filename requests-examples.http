@@ -5,6 +5,7 @@ GET http://localhost:8000/shop/api/v1/products/
 Content-Type: application/json
 
 ###
+
 # создание продуктов
 POST http://localhost:8000/shop/api/v1/products/
 Content-Type: application/json
@@ -17,6 +18,13 @@ Content-Type: application/json
 }
 
 ###
+
+# получение заказа
+GET http://localhost:8000/shop/api/v1/orders/
+Content-Type: application/json
+
+###
+
 # создание заказа
 POST http://localhost:8000/shop/api/v1/orders/
 Content-Type: application/json
@@ -24,20 +32,23 @@ Content-Type: application/json
 
 {
   "user_id": 1,
-  "position": {
+  "position": [{
     "product": 1,
-    "order": 1,
     "amount": 3
-  },
+  }],
   "status": "NEW",
   "total_order_amount": 150000
 }
-###
-# получение продуктов
-GET http://localhost:8000/shop/api/v1/products/
-Content-Type: application/json
 
 ###
+
+# Удаление объявления
+DELETE http://localhost:8000/shop/api/v1/orders/8/
+Content-Type: application/json
+# Authorization: Token 40e55cbd1553ca6e063b6f07ad06739d3b096896
+
+###
+
 # попытка поменять объявление
 PATCH http://localhost:8000/api/advertisements/5/
 Content-Type: application/json
