@@ -52,9 +52,10 @@ class Order(TimestampFields):
     )
     #еще раз обдумать position, сейчас не верно 
     position = models.ManyToManyField(
-        "ProductOrder",
+        "Product",
         verbose_name=("Позиции"),
-        related_name="positions"
+        related_name="orders",
+        through="ProductOrder"
         )
     status = models.TextField(
         verbose_name="Статус",
@@ -83,6 +84,7 @@ class ProductOrder(models.Model):
     order = models.ForeignKey(
         Order,
         verbose_name="Заказ",
+        related_name="order_product",
         on_delete=models.CASCADE
         )
     amount = models.IntegerField(
