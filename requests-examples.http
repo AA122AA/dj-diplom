@@ -1,5 +1,7 @@
 # примеры API-запросов
 
+#Действия с продуктами 
+
 # получение продуктов
 GET http://localhost:8000/shop/api/v1/products/
 Content-Type: application/json
@@ -12,12 +14,14 @@ Content-Type: application/json
 # Authorization: Token 9e7965c94d2edebd6a23d4d4d5080e9b87f6812b
 
 {
-  "name": "Samsung S21 Ultra",
-  "description": "Big phone from Samsung, better get it on SnapDragon 888",
-  "price": 120000
+  "name": "rpi 4",
+  "description": "",
+  "price": 6000
 }
 
-###
+#########################################
+
+#Действия с заказами 
 
 # получение заказа
 GET http://localhost:8000/shop/api/v1/orders/
@@ -31,25 +35,86 @@ Content-Type: application/json
 # Authorization: Token 9e7965c94d2edebd6a23d4d4d5080e9b87f6812b
 
 {
-  "user_id": 1,
-  "position": [{
-    "product": 1,
-    "amount": 3
-  }],
-  "status": "NEW",
-  "total_order_amount": 150000
+    "user_id": 1,
+    "position": [
+        {
+            "product": 1,
+            "amount": 1
+        },
+        {
+            "product": 3,
+            "amount": 1
+        }
+    ],
+    "status": "DONE",
+    "total_order_amount": 126000
 }
 
 ###
 
-# Удаление объявления
+# Удаление заказа
 DELETE http://localhost:8000/shop/api/v1/orders/8/
 Content-Type: application/json
 # Authorization: Token 40e55cbd1553ca6e063b6f07ad06739d3b096896
 
+##################################
+
+#Действия с отзывами 
+
+# получение отзывов
+GET http://localhost:8000/shop/api/v1/product-reviews/
+Content-Type: application/json
+
+###
+
+# создание отзыва
+POST http://localhost:8000/shop/api/v1/product-reviews/
+Content-Type: application/json
+# Authorization: Token 9e7965c94d2edebd6a23d4d4d5080e9b87f6812b
+
+{
+    "author_id": 1,
+    "product_id": 1,
+    "text": "not bad at all",
+    "rating": 5
+}
+
+#########################################
+
+
+# Фильтры 
+
+# Фильтры для заказов
+
+# фильтрация по создателю
+GET http://localhost:8000/shop/api/v1/orders/?user_id=2
+Content-Type: application/json
+
+###
+
+# фильтрация по дате
+GET http://localhost:8000/shop/api/v1/orders/?created_at_after=2021-04-01
+Content-Type: application/json
+
+###
+
+# фильтрация по  статусу
+GET http://localhost:8000/shop/api/v1/orders/?status=DONE 
+Content-Type: application/json
+
+###
+
+# Фильтры для продуктов
+
+# фильтрация по цене
+GET http://localhost:8000/shop/api/v1/products/?price_l=7000
+Content-Type: application/json
+
+
 ###
 
 # попытка поменять объявление
+# надо переделать для этого проекта
 PATCH http://localhost:8000/api/advertisements/5/
 Content-Type: application/json
 Authorization: Token 9e7965c94d2edebd6a23d4d4d5080e9b87f6812b
@@ -59,26 +124,3 @@ Authorization: Token 9e7965c94d2edebd6a23d4d4d5080e9b87f6812b
 }
 
 ###
-
-# фильтрация по создателю
-GET http://localhost:8000/api/advertisements/?creator=2
-Content-Type: application/json
-
-###
-
-# фильтрация по дате
-GET http://localhost:8000/api/advertisements/?created_at_after=2020-10-01
-Content-Type: application/json
-
-###
-
-# фильтрация по  статусу
-GET http://localhost:8000/api/advertisements/?status=CLOSED
-Content-Type: application/json
-
-###
-
-# Удаление объявления
-DELETE http://localhost:8000/api/advertisements/4/
-Content-Type: application/json
-Authorization: Token 40e55cbd1553ca6e063b6f07ad06739d3b096896

@@ -52,11 +52,16 @@ class OrderSerializer(serializers.ModelSerializer):
             ProductOrder.objects.bulk_create(to_save)
         return _order
 
-    def validate(selfa, attrs:OrderedDict):
-        print(type(attrs))
-        price = attrs.get("order_product")[0].get("product").price
-        amount = attrs.get("order_product").pop().get("amount")
-        if attrs.get("total_order_amount") != price*amount:
+    def validate(self, attrs:OrderedDict):
+        print(attrs.get("order_product"))
+        sum = 0
+        for _dict in attrs.get("order_product"):
+            price = _dict.get("product").price
+            amount = _dict.get("amount")
+            sum+= price*amount
+        # price = attrs.get("order_product")[0].get("product").price
+        # amount = attrs.get("order_product").pop().get("amount")
+        if attrs.get("total_order_amount") != sum:
             raise serializers.ValidationError("Не верно указана общая цена заказа")
         return attrs
 
@@ -69,6 +74,11 @@ class ReviewSerializer(serializers.ModelSerializer):
             'text', "rating",
             'created_at', 'updated_at'
         ]
+
+    def validate(self, attrs:OrderedDict):
+        print(attrs)
+
+        return attrs
 
 
 class CollectionSerializer(serializers.ModelSerializer):

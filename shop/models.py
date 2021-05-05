@@ -50,7 +50,6 @@ class Order(TimestampFields):
         verbose_name=("Пользователь"),
         on_delete=models.CASCADE,
     )
-    #еще раз обдумать position, сейчас не верно 
     position = models.ManyToManyField(
         "Product",
         verbose_name=("Позиции"),
